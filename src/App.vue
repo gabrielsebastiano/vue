@@ -28,9 +28,7 @@ export default {
   },
   computed: {
     totalProdutos() {
-      return this.produtos.length(produtos => {
-        return produtos;
-      }, 0);
+      return this.produtos.length
     }
   },
   methods: {
