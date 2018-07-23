@@ -1,24 +1,49 @@
+import 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css'
+
+
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+     <p>{{meessage}}</p>
+      <ul>
+      <li v-for="produto in produtos">
+      {{produto}}
+      </li>
+      </ul>
+      <h2>O Total de produtos da Lista é: {{totalProdutos}}</h2>
+      <input type="text" v-model="meessage">
+    <button class="btn btn-primary" @click="apagar" type="button">Limpar</button> 
+  
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
+  name: "app",
+  data: function() {
+    return {
+      meessage: "TABELA DA PUTARIA",
+      produtos: ["gabriel", "junior", "junior", "felipe"]
+    };
+  },
+  computed: {
+    totalProdutos() {
+      return this.produtos.reduce((sum, produtos) => {
+        return parseFloat(sum) + parseFloat(produtos);
+      }, 0);
+    }
+  },
+  methods: {
+    apagar: function() {
+      this.meessage = "";
+    }
   }
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -26,3 +51,5 @@ export default {
   margin-top: 60px;
 }
 </style>
+
+
