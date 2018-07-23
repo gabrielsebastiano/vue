@@ -6,9 +6,9 @@ import 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css
     <img src="./assets/logo.png">
      <p>{{meessage}}</p>
       <ul>
-      <li v-for="produto in produtos">
-      {{produto}}
-      </li>
+        <li v-for="produto in produtos" v-bind:key="produtos">
+        {{produto}}
+        </li>
       </ul>
       <h2>O Total de produtos da Lista é: {{totalProdutos}}</h2>
       <input type="text" v-model="meessage">
@@ -28,8 +28,8 @@ export default {
   },
   computed: {
     totalProdutos() {
-      return this.produtos.reduce((sum, produtos) => {
-        return parseFloat(sum) + parseFloat(produtos);
+      return this.produtos.length(produtos => {
+        return produtos;
       }, 0);
     }
   },
