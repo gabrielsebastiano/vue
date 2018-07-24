@@ -1,4 +1,5 @@
 import 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css'
+import Vue from 'vue';
 
 
 <template>
@@ -6,14 +7,13 @@ import 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css
     <img src="./assets/logo.png">
      <p>{{meessage}}</p>
       <ul>
-        <li v-for="produto in produtos" v-bind:key="produtos">
+        <li v-for="produto in produtos" v-bind:key="produto">
         {{produto}}
         </li>
       </ul>
       <h2>O Total de produtos da Lista é: {{totalProdutos}}</h2>
-      <input type="text" v-model="meessage">
-    <button class="btn btn-primary" @click="apagar" type="button">Limpar</button> 
-  
+      <input type="text"  v-model="message" placeholder="Insira aqui o produto">
+    <button v-on:message="handleMessage" type="button">Enviar</button> 
   </div>
 </template>
 
@@ -22,21 +22,25 @@ export default {
   name: "app",
   data: function() {
     return {
-      meessage: "TABELA DA PUTARIA",
-      produtos: ["gabriel", "junior", "junior", "felipe"]
-    };
+      meessage: "Minha Lista de Compras",
+      produtos: [],
+    }
   },
   computed: {
     totalProdutos() {
-      return this.produtos.length
+      return this.produtos.length;
     }
   },
   methods: {
-    apagar: function() {
-      this.meessage = "";
+    handleSendMessage: function () {
+      this.$emit('message', { produtos: this.produtos })
+    },handleMessage: function (payload) {
+      this.produtos.push(payload.produtos)
     }
   }
 };
+
+
 </script>
 
 <style>
